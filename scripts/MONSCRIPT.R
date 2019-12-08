@@ -2,6 +2,12 @@
 
 crypto<-read.csv(file.choose(),sep=";",dec=",",header=TRUE)
 crypto
+#-----------------------------------------------------------
+#crypto<-read.csv("crypto-markets.csv", header=TRUE)
+#le sep pour moi est ',' et non pas ';' donc le read csv
+#vas lire les colonnes directement. pas besoin de specifier
+#le sep (**Comma**-separated values)
+#-----------------------------------------------------------
 
 # 1 transformation du format de la date en format anglais si le format est JJ/MM/AAAA
 
@@ -39,8 +45,11 @@ crypto$mois=months(crypto$transf)
 #extraction du jour
 crypto$jour=weekdays(crypto$transf)
 
-
-
+#-----------------------------------------------------------------------
+#crypto$date = as.Date(crypto$date)
+#crypto$annee = format(crypto$date,  "%Y")
+#pas besoin de transformer la date ou et d'extraire le mois, et le jour
+#-----------------------------------------------------------------------         
 
 ##########################################################################
 #                                                                        #                                          
@@ -49,14 +58,19 @@ crypto$jour=weekdays(crypto$transf)
 #                                                                        #
 ##########################################################################
 
-                #EXTRACTION DES DONNEES DE 2016 et 2017
+#EXTRACTION DES DONNEES DE 2016 et 2017
 
 crypto2016_2017<-crypto[which(crypto$annee>=2016 & crypto$annee<=2017),]
 crypto2016_2017
-#EXTRACTION DEs BITCOIN DE 2016 et 2017
-
+#EXTRACTION DES BITCOIN DE 2016 et 2017                              
 bitcoin2016_2017<-crypto2016_2017[which(crypto2016_2017$name=="Bitcoin"),]
 bitcoin2016_2017
+                              
+#--------------------------------------------------------------------------------------------------------------------
+#bitcoin2016_2017<-crypto[which(crypto$name=="Bitcoin" & crypto$annee>=2016 & crypto$annee<=2017),]
+#On peut passer directement sans creer une autre tableau
+#--------------------------------------------------------------------------------------------------------------------                              
+                              
 #LA MOYENNE DE COURS MINIMAL ET MAXIMALE DE BITCOIN DE 2016 et 2017 CORRESPOND A:
 
 #nombre de ligne pour bitcoin 2016 et 2017
@@ -66,14 +80,23 @@ nbrelignebitcoin2016_2017
 #cours moyenne maximale
 moyennemaxbitcoin2016_2017<-sum(bitcoin2016_2017$high)/sum(nbrelignebitcoin2016_2017)
 moyennemaxbitcoin2016_2017
-
+#------------------------------------------------------------------------------------
+#moyennemaxbitcoin2016_2017 <- mean(bitcoin2016_2017$high)
+#------------------------------------------------------------------------------------ 
+                              
 #cours moyenne minimal
 moyenneminbitcoin2016_2017<-sum(bitcoin2016_2017$low)/sum(nbrelignebitcoin2016_2017)
 moyenneminbitcoin2016_2017
-
+#------------------------------------------------------------------------------------
+#moyenneminbitcoin2016_2017 <- mean(bitcoin2016_2017$low)
+#------------------------------------------------------------------------------------ 
+                              
 #MOYENNE DES TRANSACTION
 moyennevalbitcoin2016_2017<-sum(bitcoin2016_2017$close)/sum(nbrelignebitcoin2016_2017)
 moyennevalbitcoin2016_2017
+#------------------------------------------------------------------------------------
+#moyennevalbitcoin2016_2017 <- mean(bitcoin2016_2017$close)
+#------------------------------------------------------------------------------------
 
 #PROPORTION DU BITCOIN PAR RAPPORT AUX AUTRES DEVISES
 moyenneprobitcoin2016_2017<-sum(bitcoin2016_2017$close_ratio)/sum(nbrelignebitcoin2016_2017)
