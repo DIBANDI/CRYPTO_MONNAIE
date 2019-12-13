@@ -88,7 +88,7 @@ varMarketBitcoin2013_2017<-var(bitcoin2013_2017$market)             #1.610756e+2
 
 #On fait notre test sur plusieus devises qui ont des classements different
 #Ripple - 2
-ripple2018 <- crypto[which(crypto$ranknow == 'ripple' & crypto$annee==2018),]
+ripple2018 <- crypto[which(crypto$slug == 'ripple' & crypto$annee==2018),]
 #dogecoin 24
 dogecoin2018 <- crypto[which(crypto$slug == 'dogecoin' & crypto$annee==2018),]
 #factom - 50
