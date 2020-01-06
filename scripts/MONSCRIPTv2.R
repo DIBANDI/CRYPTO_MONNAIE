@@ -117,6 +117,14 @@ dogecoin2018$date = NULL
 
 corDogecoin2018 <- cor(dogecoin2018)
 
+#FACTOM
+# On test la correlation entre le Bitcoin et factom
+factom2018 <- factomo2018[corvars]
+colnames(factomo2018) <- c("highFactom", "lowFactom", "marketFactom", "dateFactom")
+factomo2018 <- merge(bitcoin2018[corvars], factomo2018, by.y = "dateFactom", by.x = "date")
+factomo2018$date = NULL
+
+corFactomo2018 <- cor(factomo2018)
 
 #GXCHAIN
 # On test la correlation entre le Bitcoin et Gxchain
@@ -127,3 +135,10 @@ gxchain2018$date = NULL
 
 corGxchain2018 <- cor(gxchain2018)
 
+
+
+# GRAPHES :
+corrplot(corRipple2018, method="circle")
+corrplot(corDogecoin2018, method="circle")
+corrplot(corFactomo2018, method="circle")
+corrplot(corGxchain2018, method="circle")
